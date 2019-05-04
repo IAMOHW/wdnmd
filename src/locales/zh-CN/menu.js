@@ -1,0 +1,17 @@
+export default {
+  'menu.home': '首页',
+  'menu.login': '登录',
+  'menu.register': '注册',
+  'menu.register.result': '注册结果',
+  'menu.dashboard': 'Dashboard',
+  'menu.dashboard.analysis': '分析页',
+  'menu.dashboard.monitor': '监控页',
+  'menu.dashboard.workplace': '工作台',
+  'menu.detail': '视频详情',
+  'menu.exception.not-find': '404',
+  'menu.exception.trigger': '触发错误',
+  'menu.account': '个人页',
+  'menu.account.center': '个人中心',
+  'menu.account.settings': '个人设置',
+  'menu.account.logout': '退出登录',
+};
