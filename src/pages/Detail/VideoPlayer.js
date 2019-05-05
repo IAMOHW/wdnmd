@@ -63,7 +63,7 @@ class VideoPlayer extends Component {
 
   render() {
     const {
-      video: { title, avatar, cover, relatedVideo },
+      video: { title, avatar, cover, relatedVideo, commentList },
     } = this.props;
     return (
       <Layout className={styles.layout}>
@@ -84,6 +84,21 @@ class VideoPlayer extends Component {
                 <Col span={14} className={styles.desc}>
                   <Title>{title}</Title>
                   <Divider />
+                  <List
+                    dataSource={commentList}
+                    renderItem={item => (
+                      <List.Item>
+                        <List.Item.Meta
+                          avatar={
+                            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                          }
+                          title={<a href="https://ant.design">{item.name}</a>}
+                          description={item.dateTime}
+                        />
+                        <div>{item.content}</div>
+                      </List.Item>
+                    )}
+                  />
                 </Col>
                 <Col span={10} className={styles.related}>
                   <Title level={2}>Related Titles</Title>

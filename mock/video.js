@@ -51,11 +51,19 @@ function fakeVideoList({ query: { count = 10, offset = 0 } }, res) {
 
 function fakeVideoInfo({ params: { id }, res }) {
   const list = [];
+  const commentList = [];
   for (let i = 0; i < id; i += 1) {
     list.push({
       id: i,
       cover: avatars[id % 3],
       title: titles[id % 8],
+    });
+    commentList.push({
+      id: i,
+      name: '匿名用户',
+      avatar: avatars[id % 3],
+      content: desc[id % 5],
+      dateTime: new Date().toDateString(),
     });
   }
 
@@ -66,6 +74,7 @@ function fakeVideoInfo({ params: { id }, res }) {
     url: videos[id % 3],
     online: id + 10,
     relatedVideo: list,
+    commentList,
   });
 }
 
