@@ -13,14 +13,14 @@ export default {
       const response = yield call(queryUsers);
       yield put({
         type: 'save',
-        payload: response,
+        payload: response.data,
       });
     },
     *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
       yield put({
         type: 'saveCurrentUser',
-        payload: response,
+        payload: response.data,
       });
     },
   },
@@ -38,13 +38,11 @@ export default {
         currentUser: action.payload || {},
       };
     },
-    changeNotifyCount(state, action) {
+    changeNotifyCount(state) {
       return {
         ...state,
         currentUser: {
           ...state.currentUser,
-          notifyCount: action.payload.totalCount,
-          unreadCount: action.payload.unreadCount,
         },
       };
     },

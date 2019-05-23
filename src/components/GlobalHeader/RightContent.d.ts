@@ -10,11 +10,8 @@ export interface GlobalHeaderRightProps {
     avatar?: string;
     name?: string;
     title?: string;
-    group?: string;
     signature?: string;
-    geographic?: any;
     tags?: any[];
-    unreadCount: number;
   };
   fetchingNotices?: boolean;
   onNoticeVisibleChange?: (visible: boolean) => void;

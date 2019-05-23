@@ -21,7 +21,6 @@ export default [
   {
     path: '/',
     component: '../layouts/BasicLayout',
-    Routes: ['src/pages/Authorized'],
     routes: [
       // dashboard
       { path: '/', redirect: '/videos', authority: ['admin', 'user'] },
@@ -47,7 +46,6 @@ export default [
         name: 'videoManager',
         icon: 'dash',
         component: './Manager/BasicList',
-        authority: ['admin'],
       },
 
       // detail

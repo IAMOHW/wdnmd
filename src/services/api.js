@@ -125,10 +125,36 @@ export async function getFakeCaptcha(mobile) {
   return request(`/api/captcha?mobile=${mobile}`);
 }
 
-export async function queryVideoList({ category = 'all', count = 10, offset = 0 }) {
-  return request(`/api/videos?category=${category}&count=${count}&offset=${offset}`);
+export async function queryVideoList() {
+  return request(`/api/video/videolist`);
 }
 
 export async function queryVideoInfo({ id }) {
-  return request(`/api/video/${id}`);
+  return request(`/api/video/videos/${id}`);
+}
+
+export async function deleteVideo(id) {
+  return request(`/api/video/videos/${id}`, {
+    method: 'DELETE',
+  });
+}
+
+export async function submitComment(params) {
+  return request('/api/comment/acomments', {
+    method: 'POST',
+    requestType: 'form',
+    data: params,
+  });
+}
+
+export async function createVideo(params) {
+  return request('/api/video/videos', {
+    method: 'POST',
+    requestType: 'form',
+    data: params,
+  });
+}
+
+export async function getToken() {
+  return request('/api/video/signature');
 }

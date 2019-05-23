@@ -25,15 +25,6 @@ class Center extends PureComponent {
     dispatch({
       type: 'user/fetchCurrent',
     });
-    dispatch({
-      type: 'list/fetch',
-      payload: {
-        count: 8,
-      },
-    });
-    dispatch({
-      type: 'project/fetchNotice',
-    });
   }
 
   onTabChange = key => {
@@ -128,7 +119,7 @@ class Center extends PureComponent {
                 <div>
                   <div className={styles.avatarHolder}>
                     <img alt="" src={currentUser.avatar} />
-                    <div className={styles.name}>{currentUser.name}</div>
+                    <div className={styles.name}>{currentUser.userNickname}</div>
                     <div>{currentUser.signature}</div>
                   </div>
                   <div className={styles.detail}>
@@ -137,21 +128,12 @@ class Center extends PureComponent {
                       {currentUser.title}
                     </p>
                     <p>
-                      <i className={styles.group} />
-                      {currentUser.group}
-                    </p>
-                    <p>
                       <i className={styles.address} />
-                      {currentUser.geographic.province.label}
-                      {currentUser.geographic.city.label}
                     </p>
                   </div>
                   <Divider dashed />
                   <div className={styles.tags}>
                     <div className={styles.tagsTitle}>标签</div>
-                    {currentUser.tags.concat(newTags).map(item => (
-                      <Tag key={item.key}>{item.label}</Tag>
-                    ))}
                     {inputVisible && (
                       <Input
                         ref={this.saveInputRef}

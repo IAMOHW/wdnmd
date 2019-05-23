@@ -1,4 +1,4 @@
-import { queryVideoList } from '@/services/api';
+import { queryVideoList, deleteVideo } from '@/services/api';
 
 export default {
   namespace: 'home',
@@ -19,6 +19,10 @@ export default {
         payload: response || {},
       });
     },
+    *deleteVideo({ payload, onComplete }, { call }) {
+      const response = yield call(deleteVideo, payload);
+      onComplete(response);
+    },
   },
 
   reducers: {
@@ -27,7 +31,6 @@ export default {
       return {
         ...state,
         ...payload,
-        videoList: state.videoList.concat(payload.videoList),
         hasMore: payload.nextOffset !== null,
         loading: false,
       };

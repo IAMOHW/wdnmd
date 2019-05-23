@@ -1,15 +1,12 @@
-import { queryVideoInfo } from '@/services/api';
+import { queryVideoInfo, submitComment, getToken, createVideo } from '@/services/api';
 
 export default {
   namespace: 'video',
 
   state: {
-    title: '',
-    avator: '',
-    url: '',
-    cover: '',
-    online: 0,
-    relatedVideo: [],
+    commentList: [],
+    videoDetail: {},
+    recommend: [],
   },
 
   effects: {
@@ -20,6 +17,16 @@ export default {
         payload: response || {},
       });
       onComplete(response);
+    },
+    *submitComment({ payload, onComplete }, { call }) {
+      const response = yield call(submitComment, payload);
+      onComplete(response);
+    },
+    *getToken({ payload }, { call }) {
+      return yield call(getToken, payload);
+    },
+    *create({ payload }, { call }) {
+      return yield call(createVideo, payload);
     },
   },
 

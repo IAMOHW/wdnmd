@@ -24,7 +24,7 @@ class Home extends Component {
     }
   }
 
-  onLoadMore() {
+  onLoadMore = () => {
     const {
       dispatch,
       location: {
@@ -40,7 +40,7 @@ class Home extends Component {
         offset: nextOffset,
       },
     });
-  }
+  };
 
   handleCardClick = id => {
     router.push(`/detail/${id}`);
@@ -73,10 +73,12 @@ class Home extends Component {
             <Card
               hoverable
               style={{ width: 240 }}
-              cover={<img style={{ height: '238px' }} alt={item.alt} src={item.src} />}
+              cover={
+                <img style={{ height: '238px' }} alt={item.videoContent} src={item.videoImg} />
+              }
               onClick={() => this.handleCardClick(item.id)}
             >
-              <Meta title={item.title} description={item.description} />
+              <Meta title={item.videoTitle} description={item.videoContent} />
             </Card>
           </List.Item>
         )}

@@ -3,7 +3,6 @@ import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
 import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
-import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
 import HeaderDropdown from '../HeaderDropdown';
 import SelectLang from '../SelectLang';
@@ -64,14 +63,7 @@ export default class GlobalHeaderRight extends PureComponent {
   };
 
   render() {
-    const {
-      currentUser,
-      fetchingNotices,
-      onNoticeVisibleChange,
-      onMenuClick,
-      onNoticeClear,
-      theme,
-    } = this.props;
+    const { currentUser, onMenuClick, theme } = this.props;
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item key="userCenter">
@@ -89,8 +81,6 @@ export default class GlobalHeaderRight extends PureComponent {
         </Menu.Item>
       </Menu>
     );
-    const noticeData = this.getNoticeData();
-    const unreadMsg = this.getUnreadData(noticeData);
     let className = styles.right;
     if (theme === 'dark') {
       className = `${styles.right}  ${styles.dark}`;
@@ -122,53 +112,7 @@ export default class GlobalHeaderRight extends PureComponent {
             <Icon type="question-circle-o" />
           </a>
         </Tooltip>
-        <NoticeIcon
-          className={styles.action}
-          count={currentUser.unreadCount}
-          onItemClick={(item, tabProps) => {
-            console.log(item, tabProps); // eslint-disable-line
-            this.changeReadState(item, tabProps);
-          }}
-          loading={fetchingNotices}
-          locale={{
-            emptyText: formatMessage({ id: 'component.noticeIcon.empty' }),
-            clear: formatMessage({ id: 'component.noticeIcon.clear' }),
-            viewMore: formatMessage({ id: 'component.noticeIcon.view-more' }),
-            notification: formatMessage({ id: 'component.globalHeader.notification' }),
-            message: formatMessage({ id: 'component.globalHeader.message' }),
-            event: formatMessage({ id: 'component.globalHeader.event' }),
-          }}
-          onClear={onNoticeClear}
-          onPopupVisibleChange={onNoticeVisibleChange}
-          onViewMore={() => message.info('Click on view more')}
-          clearClose
-        >
-          <NoticeIcon.Tab
-            count={unreadMsg.notification}
-            list={noticeData.notification}
-            title="notification"
-            emptyText={formatMessage({ id: 'component.globalHeader.notification.empty' })}
-            emptyImage="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg"
-            showViewMore
-          />
-          <NoticeIcon.Tab
-            count={unreadMsg.message}
-            list={noticeData.message}
-            title="message"
-            emptyText={formatMessage({ id: 'component.globalHeader.message.empty' })}
-            emptyImage="https://gw.alipayobjects.com/zos/rmsportal/sAuJeJzSKbUmHfBQRzmZ.svg"
-            showViewMore
-          />
-          <NoticeIcon.Tab
-            count={unreadMsg.event}
-            list={noticeData.event}
-            title="event"
-            emptyText={formatMessage({ id: 'component.globalHeader.event.empty' })}
-            emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
-            showViewMore
-          />
-        </NoticeIcon>
-        {currentUser.name ? (
+        {currentUser.userNickname ? (
           <HeaderDropdown overlay={menu}>
             <span className={`${styles.action} ${styles.account}`}>
               <Avatar
@@ -177,7 +121,7 @@ export default class GlobalHeaderRight extends PureComponent {
                 src={currentUser.avatar}
                 alt="avatar"
               />
-              <span className={styles.name}>{currentUser.name}</span>
+              <span className={styles.name}>{currentUser.userNickname}</span>
             </span>
           </HeaderDropdown>
         ) : (
