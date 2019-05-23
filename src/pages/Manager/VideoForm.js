@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Form, Icon, Input, Upload, message } from 'antd';
+import { Form, Icon, Input, Upload } from 'antd';
 import CosCloud from 'cos-js-sdk-v5';
 
 const config = {
